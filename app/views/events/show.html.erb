@@ -1,0 +1,8 @@
+<h1><%= @event.title %></h1>
+<h2> <%= @event.location %> <%=  @event.start_time %></h2>
+<p>
+  <%= @event.body %>
+</p>
+
+<%= link_to "Edit", edit_event_path(@event) %>
+<%= link_to "Cancel Event", event_path(@event), method: :delete %>
