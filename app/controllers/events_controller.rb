@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
   def index
     @events = Event.all
   end
@@ -8,11 +9,11 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    @event = current_user.hosted_events.build
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = current_user.hosted_events.build(event_params)
     if @event.save
       redirect_to @event
     else
