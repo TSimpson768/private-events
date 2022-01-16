@@ -1,1 +1,6 @@
 <h2><%= @user.username%>'s page</h2>
+
+<h3>Hosted Events</h3>
+<% @user.hosted_events.each do |event| %>
+  <h4><%= event.title%></h4>
+<% end %>
