@@ -4,3 +4,17 @@
 <% @user.hosted_events.each do |event| %>
   <h4><%= event.title%></h4>
 <% end %>
+<br>
+<h3><%= @user.username%> is going to:</h3>
+<% @user.attended_events.where('start_time >= ?', DateTime.now).each do |event| %>
+  <h4><%= event.title%></h4>
+  <h6><%= event.start_time%></h6>
+  <%= link_to 'Event', event_path(event) %>
+<%end%>
+
+<h3><%= @user.username%> went to</h3>
+<% @user.attended_events.where('start_time <= ?', DateTime.now).each do |event| %>
+  <h4><%= event.title%></h4>
+  <h6><%= event.start_time%></h6>
+  <%= link_to 'Event', event_path(event) %>
+<%end%>
