@@ -3,6 +3,7 @@
 <h3>Hosted by <%= @event.host.username %></h3>
 <p>
   <%= @event.body %>
+  <%= render "event_attendees/rsvp" %>
 </p>
 
 <%= link_to "Edit", edit_event_path(@event) %>
