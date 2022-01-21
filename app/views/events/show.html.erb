@@ -3,7 +3,12 @@
 <h3>Hosted by <%= @event.host.username %></h3>
 <p>
   <%= @event.body %>
-  <%= render "event_attendees/rsvp" %>
+  <br>
+  <% if user_signed_in? %>
+    <%= render "event_attendees/rsvp" %>
+  <%else%>
+    Register today to attend!
+  <%end%>
 </p>
 
 <h3>Attendees</h3>
