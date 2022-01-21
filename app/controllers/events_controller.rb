@@ -9,7 +9,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
   end
 
   def new
@@ -26,11 +25,9 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
   end
 
   def update
-    @event = Event.find(params[:id])
     if @event.update(event_params)
       redirect_to @event
     else
@@ -39,7 +36,6 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find(params[:id])
     @event.destroy
 
     redirect_to root_path
@@ -50,12 +46,13 @@ class EventsController < ApplicationController
   def set_event
     @event = Event.find(params[:id])
   end
+
   def event_params
     params.require(:event).permit(:title, :body, :start_time, :location)
   end
 
   def authorized?
-    flash[:error] =  'You are not permitted to perform this action!'
+    flash[:error] = 'You are not permitted to perform this action!'
     redirect_to :events unless @event.host_id == current_user.id
   end
 end
