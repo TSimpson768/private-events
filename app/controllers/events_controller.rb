@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
+  before_action :set_event, only: %i[show edit update destroy]
   before_action :authenticate_user!, except: %i[index show]
+  before_action :authorized?, only: %i[edit update destroy]
   def index
 #    @events = Event.all
     @past_events = Event.past.all
@@ -45,7 +47,15 @@ class EventsController < ApplicationController
 
   private
 
+  def set_event
+    @event = Event.find(params[:id])
+  end
   def event_params
     params.require(:event).permit(:title, :body, :start_time, :location)
+  end
+
+  def authorized?
+    flash[:error] =  'You are not permitted to perform this action!'
+    redirect_to :events unless @event.host_id == current_user.id
   end
 end
