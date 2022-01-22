@@ -1,10 +1,13 @@
 class EventAttendeesController < ApplicationController
   def create
     @user = User.find(username: params[:username])
-    redirect_to event_path unless @user
-
-    @event = Event.find(params[:event_id])
-    @event.event_attendees.build(attendee_id: @user.id).save
+    if @user
+      @event = Event.find(params[:event_id])
+      @event.event_attendees.build(attendee_id: @user.id, accepted: false).save
+      flash[:message] = "#{@user.username} invited!"
+    else
+      flash[:error] = 'User not found'
+    end
     redirect_to event_path(@event)
   end
 
@@ -14,6 +17,7 @@ class EventAttendeesController < ApplicationController
 
     redirect_to event_path
   end
+
   private
 
   def event_attendees_params
