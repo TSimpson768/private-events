@@ -5,7 +5,11 @@
   <%= @event.body %>
   <br>
   <% if user_signed_in? %>
-    <%= render "event_attendees/rsvp" %>
+    <% if @event_attendee %>
+      <%= render "event_attendees/cancel" %>
+    <% else %>
+      <%= render "event_attendees/rsvp" %>
+    <% end %>
   <%else%>
     Register today to attend!
   <%end%>

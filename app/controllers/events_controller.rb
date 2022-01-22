@@ -9,6 +9,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event_attendee = current_user.event_attendees.where('event_id = ?', @event.id).first if user_signed_in?
   end
 
   def new

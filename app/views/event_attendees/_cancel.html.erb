@@ -1,0 +1,6 @@
+<% if @event.future? %>
+  You're going!
+<% else %>
+ You went!
+<%end%>
+<%= link_to "No longer going?", event_event_attendee_path(@event_attendee), method: :delete %>

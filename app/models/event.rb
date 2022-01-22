@@ -13,4 +13,7 @@ class Event < ApplicationRecord
   # def self.future
   #   Event.where('start_time >= ?', DateTime.now)
   # end
+  def future?
+    start_time >= DateTime.now
+  end
 end
