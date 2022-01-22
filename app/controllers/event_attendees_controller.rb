@@ -1,7 +1,10 @@
 class EventAttendeesController < ApplicationController
   def create
+    @user = User.find(username: params[:username])
+    redirect_to event_path unless @user
+
     @event = Event.find(params[:event_id])
-    @event.event_attendees.build(attendee_id: current_user.id).save
+    @event.event_attendees.build(attendee_id: @user.id).save
     redirect_to event_path(@event)
   end
 
@@ -10,5 +13,10 @@ class EventAttendeesController < ApplicationController
     @event_attendee.destroy
 
     redirect_to event_path
+  end
+  private
+
+  def event_attendees_params
+    params.permit(:username)
   end
 end

@@ -1,0 +1,5 @@
+<%= form_with model: [@event, @event.event_attendees.build]do |form|%>
+  <%= form.label :username, "Invite a user!"%>
+  <%= form.text_field :username %>
+  <%= form.submit %>
+<% end %>
