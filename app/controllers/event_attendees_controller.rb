@@ -1,8 +1,8 @@
 class EventAttendeesController < ApplicationController
   def create
-    @user = User.find(username: params[:username])
+    @user = User.where('username = ?', params[:event_attendee][:username]).first
+    @event = Event.find(params[:event_id])
     if @user
-      @event = Event.find(params[:event_id])
       @event.event_attendees.build(attendee_id: @user.id, accepted: false).save
       flash[:message] = "#{@user.username} invited!"
     else
@@ -11,8 +11,15 @@ class EventAttendeesController < ApplicationController
     redirect_to event_path(@event)
   end
 
+  def update
+    @event_attendee = EventAttendee.where('event_id = ? and attendee_id = ?', params[:event_id], current_user.id).first
+    @event_attendee.update(event_attendees_params)
+    flash[:notice]='Invite accepted!'
+    redirect_to event_path(params[:event_id])
+  end
+
   def destroy
-    @event_attendee = EventAttendee.where('event_id = ? and attendee_id = ?', params[:id], current_user.id).first
+    @event_attendee = EventAttendee.where('event_id = ? and attendee_id = ?', params[:event_id], current_user.id).first
     @event_attendee.destroy
 
     redirect_to event_path
@@ -21,6 +28,6 @@ class EventAttendeesController < ApplicationController
   private
 
   def event_attendees_params
-    params.permit(:username)
+    params.require(:event_attendee).permit(:username, :accepted)
   end
 end

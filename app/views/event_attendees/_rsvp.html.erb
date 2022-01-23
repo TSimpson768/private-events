@@ -1,3 +1,4 @@
-<%= form_with model: [@event, @event.event_attendees.build] do |form| %>
-  <%= form.submit %>
+<%= form_with model: [@event, @event_attendee] do |form| %>
+  <%= form.hidden_field :accepted, value: true %>
+  <%= form.submit "I'm going!"%>
 <% end %>

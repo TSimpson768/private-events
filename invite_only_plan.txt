@@ -1,0 +1,7 @@
+On event view - if current user is host - render a partial with a form to input a username. If username is found send an invite, otherwise, flash user not found.
+
+Create a user/id/invites index page to show all invites. Each invite has a link to show the event, a link to accept or decline. Accept creates an event_attendee, both destroy the invite in question.
+
+Ensure an event_attendee can only be created if the relavent invite exists!
+
+Invite db schema - user_id, event_id - use event attendee table with extra bool column for true false?

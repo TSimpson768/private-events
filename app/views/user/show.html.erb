@@ -1,9 +1,9 @@
 <h2><%= @user.username%>'s page</h2>
 <h3>Your Invited To</h3>
-<% @user.event_attendees.invited.events.each do |event| %>
-    <h4><%= event.title%></h4>
-    <h6><%= event.start_time%></h6>
-    <%= link_to 'Event', event_path(event) %>
+<% @user.attended_events.user_invited(@user).each do |event| %>
+      <h4><%= event.title%></h4>
+      <h6><%= event.start_time%></h6>
+      <%= link_to 'Event', event_path(event) %>
 <% end %>
 <h3>Hosted Events</h3>
 <% @user.hosted_events.each do |event| %>
@@ -11,14 +11,14 @@
 <% end %>
 <br>
 <h3><%= @user.username%> is going to:</h3>
-<% @user.attended_events.where('start_time >= ?, accepted = ?', DateTime.now, true).each do |event| %>
+<% @user.attended_events.future.each do |event| %>
   <h4><%= event.title%></h4>
   <h6><%= event.start_time%></h6>
   <%= link_to 'Event', event_path(event) %>
 <%end%>
 
 <h3><%= @user.username%> went to</h3>
-<% @user.attended_events.where('start_time <= ?, accepted = ?', DateTime.now, true).each do |event| %>
+<% @user.attended_events.past.each do |event| %>
   <h4><%= event.title%></h4>
   <h6><%= event.start_time%></h6>
   <%= link_to 'Event', event_path(event) %>

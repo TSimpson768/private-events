@@ -5,6 +5,7 @@ class Event < ApplicationRecord
 
   scope :past, -> { where('start_time <= ?', DateTime.now) }
   scope :future, -> { where('start_time >= ?', DateTime.now) }
+  scope :user_invited, ->(user) { joins(:event_attendees).where('event_attendees.attendee_id = ? AND event_attendees.accepted = false', user.id) }
 
   # def self.past
   #   Event.where('start_time <= ?', DateTime.now)

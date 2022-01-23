@@ -4,16 +4,20 @@
 <p>
   <%= @event.body %>
   <br>
-  <% if user_signed_in? %>
-    <% if @event_attendee %>
+  <% if @event_attendee %>
+    <% if @event_attendee.accepted == true %>
       <%= render "event_attendees/cancel" %>
     <% else %>
       <%= render "event_attendees/rsvp" %>
     <% end %>
   <%else%>
-    Register today to attend!
+    Contact the host for an invite.
   <%end%>
 </p>
+
+<% if current_user&.id == @event.host_id %>
+<%= render "event_attendees/invite" %>
+<% end %>
 
 <h3>Attendees</h3>
 <% @event.attendees.each do |attendee| %>

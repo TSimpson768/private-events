@@ -17,6 +17,9 @@
     </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+    <% flash.each do |message| %>
+      <%= message %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
