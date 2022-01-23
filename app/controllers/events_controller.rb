@@ -19,6 +19,7 @@ class EventsController < ApplicationController
   def create
     @event = current_user.hosted_events.build(event_params)
     if @event.save
+      @event.event_attendees.build(attendee_id: @event.host_id, accepted: true).save
       redirect_to @event
     else
       render :new
