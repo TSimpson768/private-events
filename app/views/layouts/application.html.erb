@@ -15,10 +15,8 @@
       <%= link_to "Home", events_path %>
       <%= render "user_panel" %>
     </div>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <% flash.each do |message| %>
-      <%= message %>
+    <% flash.each do |name, message| %>
+      <div class="<%= name %>"><%= message %></div>
     <% end %>
     <%= yield %>
   </body>
