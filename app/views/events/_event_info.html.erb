@@ -1,0 +1,5 @@
+<% if @event.event_attendee_exists?(current_user) %>
+  <h2> <%= @event.location %> <%=  @event.start_time %></h2>
+<% else %>
+  <h2>You need to be invited to see the time and location</h2>
+<% end %>

@@ -17,4 +17,8 @@ class Event < ApplicationRecord
   def future?
     start_time >= DateTime.now
   end
+
+  def event_attendee_exists?(user)
+      event_attendees.where('event_attendees.attendee_id = ?', user.id).any?
+  end
 end

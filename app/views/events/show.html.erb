@@ -1,5 +1,5 @@
 <h1><%= @event.title %></h1>
-<h2> <%= @event.location %> <%=  @event.start_time %></h2>
+<%= render "event_info" %>
 <h3>Hosted by <%= @event.host.username %></h3>
 <p>
   <%= @event.body %>
