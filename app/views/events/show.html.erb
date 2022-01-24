@@ -16,13 +16,14 @@
 </p>
 
 <% if current_user&.id == @event.host_id %>
-<%= render "event_attendees/invite" %>
+  <%= render "event_attendees/invite" %>
 <% end %>
 
 <h3>Attendees</h3>
 <% @event.attendees.each do |attendee| %>
   <%= attendee.username %>
 <% end %><br>
-
-<%= link_to "Edit", edit_event_path(@event) %>
-<%= link_to "Cancel Event", event_path(@event), method: :delete %>
+<% if @event.host_id == current_user.id %>
+  <%= link_to "Edit", edit_event_path(@event) %>
+  <%= link_to "Cancel Event", event_path(@event), method: :delete %>
+<% end %>
