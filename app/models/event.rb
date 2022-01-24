@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :host, class_name: 'User'
-  has_many :event_attendees, foreign_key: :event_id
+  has_many :event_attendees, foreign_key: :event_id, dependent: :destroy
   has_many :attendees, through: :event_attendees, source: :attendee
 
   scope :past, -> { where('start_time <= ?', DateTime.now) }
