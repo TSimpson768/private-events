@@ -1,8 +1,24 @@
+<div class='event-form'>
 <%= form_with model: event do |form| %>
-  <%= form.text_field :title %>
-  <%=form.text_field :location %>
-  <%= form.datetime_local_field :start_time %>
-  <%= form.text_area :body %>
-
+  <div class = 'form-container'>
+    <div class = 'field-container'>
+      <%= form.label :title %>
+      <%= form.text_field :title %><br>
+    </div>
+    <div class = 'field-container'>
+      <%= form.label :location %>
+      <%=form.text_field :location %><br>
+    </div>
+    <div class = 'field-container'>
+      <%= form.label :start_time %>
+      <%= form.datetime_local_field :start_time %><br>
+    </div>
+    <div class = 'field-container'>
+      <%= form.label :body %>
+      <%= form.text_area :body %><br>
+    </div>
+  </div>
+  <br>
   <%= form.submit %>
 <% end %>
+</div>
