@@ -15,7 +15,7 @@
   <%end%>
 </p>
 
-<% if current_user&.id == @event.host_id %>
+<% if user_signed_in? && current_user&.id == @event.host_id %>
   <%= render "event_attendees/invite" %>
 <% end %>
 
@@ -23,7 +23,7 @@
 <% @event.attendees.each do |attendee| %>
   <%= attendee.username %>
 <% end %><br>
-<% if @event.host_id == current_user.id %>
+<% if user_signed_in? && @event.host_id == current_user.id %>
   <%= link_to "Edit", edit_event_path(@event) %>
   <%= link_to "Cancel Event", event_path(@event), method: :delete %>
 <% end %>
