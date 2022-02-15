@@ -21,4 +21,8 @@ class Event < ApplicationRecord
   def event_attendee_exists?(user)
       event_attendees.where('event_attendees.attendee_id = ?', user.id).any?
   end
+
+  def confirmed_users
+    User.joins(:event_attendees).where('event_attendees.accepted = true AND event_attendees.event_id = ?', id)
+  end
 end
