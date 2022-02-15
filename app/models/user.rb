@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_many :hosted_events, foreign_key: 'host_id', class_name: 'Event'
   has_many :event_attendees, foreign_key: :attendee_id, dependent: :destroy
   has_many :attended_events, through: :event_attendees, source: :event
+
+  def confirmed_events
+    Event.joins(:event_attendees).where('event_attendees.accepted = true AND event_attendees.attendee_id = ?', id)
+  end
 end

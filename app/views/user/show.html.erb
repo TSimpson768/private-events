@@ -11,14 +11,14 @@
 <% end %>
 <br>
 <h3><%= @user.username%> is going to:</h3>
-<% @user.attended_events.future.each do |event| %>
+<% @user.confirmed_events.future.each do |event| %>
   <h4><%= event.title%></h4>
   <h6><%= event.start_time%></h6>
   <%= link_to 'Event', event_path(event) %>
 <%end%>
 
 <h3><%= @user.username%> went to</h3>
-<% @user.attended_events.past.each do |event| %>
+<% @user.confirmed_events.past.each do |event| %>
   <h4><%= event.title%></h4>
   <h6><%= event.start_time%></h6>
   <%= link_to 'Event', event_path(event) %>
